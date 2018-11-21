@@ -2,18 +2,18 @@
 @section('contenido')
 <div class="row">
     <div class="col-12 bg-secondary text-white">
-        <h3 class="text-center">Listado de Grados</h3>
+        <h3 class="text-center">Listado de Materias</h3>
     </div>
 </div>
 <section class="container mt-3">
     <div class="col">
-        @component('admin.grados.partials.grados', compact('grados'))
+        @component('admin.materias.partials.materias', compact('materias'))
         @endcomponent
     </div>
 </section>
 
 <style>
-    #btnAgregarGrado {
+    #btnAgregarMateria {
         position: fixed;
         display: block;
         right: 0;
@@ -25,7 +25,7 @@
 
 </style>
 <!-- Colored FAB button with ripple -->
-<a id="btnAgregarGrado" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color-text--white"
+<a id="btnAgregarMateria" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color-text--white"
     onclick="agregar()">
     <i class="material-icons">add</i>
 </a>
@@ -35,16 +35,13 @@
     function agregar() {
         $.confirm({
             icon: 'fas fa-keyboard',
-            title: 'Agregar Grado',
+            title: 'Agregar Materia',
             content: '' +
-                '<form id="formGrado">' +
+                '<form id="formMateria">' +
                 '<div class="form-group">' +
-                '<label for="grado">Grado</label>' +
-                '<input id="grado" type="text" placeholder="Grado" class="form-control" />' +
-                '</div><div class="form-group">' +
-                '<label for="cupo">Cupo</label>'+
-                '<input id="cupo" type="number" placeholder="Cupo" class="form-control" /></div>' +
-                '</form>',
+                '<label for="materia">Materia</label>' +
+                '<input id="materia" type="text" placeholder="Materia" class="form-control" />' +
+                '</div></form>',
             type: 'blue',
             buttons: {
                 agregar: {
@@ -52,11 +49,10 @@
                     btnClass: 'btn btn-blue',
                     action: function () {
                         var datos = new FormData();
-                        datos.append('grado', $('#grado').val());
-                        datos.append('cupo', $('#cupo').val());
+                        datos.append('materia', $('#materia').val());
 
                         $.ajax({
-                            url: '{{ route("grados.store") }}',
+                            url: '{{ route("materias.store") }}',
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
@@ -66,15 +62,14 @@
                             cache: false,
                             data: datos,
                             beforeSend: function () {
-                                $('form#formGrado input').removeClass('is-invalid');
-                                $('#formGrado').removeClass('was-validated');
+                                $('form#formMateria input').removeClass('is-invalid');
+                                $('#formMateria').removeClass('was-validated');
                             },
                             success: function (response) {
-                                $('#formGrado').addClass('was-validated');
+                                $('#formMateria').addClass('was-validated');
                                 var row = '<tr id="row'+response.id+'">'
                                     row += '<td>'+response.id+'</td>'
-                                    row += '<td>'+response.grado+'</td>'
-                                    row += '<td>'+response.cupo+'</td>'
+                                    row += '<td>'+response.materia+'</td>'
                                     row += '<td>'+response.created_at+'</td>'
                                     row += '<td>'+response.updated_at+'</td>'
                                     row += '<td class="text-center">'
@@ -82,7 +77,7 @@
                                     row += ' <button type="button" class="btn btn-danger" onclick="eliminar('+response.id+')"><i class="fas fa-trash-alt"></i></button>'
                                     row += '</td></tr>'
                                 $('.listado').dataTable().fnDestroy();
-                                $('#tablaGrados').find('tbody').append(row);
+                                $('#tablaMaterias').find('tbody').append(row);
                                 loadTable();
                                 marcar();
                                 toastr.options = {
@@ -107,8 +102,8 @@
                             },
                             error: function (msj) {
                                 console.log(msj);
-                                if (msj.responseJSON.errors.grado != undefined) {
-                                    $('#grado').addClass('is-invalid');
+                                if (msj.responseJSON.errors.materia != undefined) {
+                                    $('#materia').addClass('is-invalid');
                                     toastr.options = {
                                         "closeButton": true,
                                         "debug": false,
@@ -126,9 +121,9 @@
                                         "showMethod": "fadeIn",
                                         "hideMethod": "fadeOut"
                                     };
-                                    toastr.error(msj.responseJSON.errors.grado, '¡Lo sentimos!');
+                                    toastr.error(msj.responseJSON.errors.materia, '¡Lo sentimos!');
                                 } else {
-                                    $('#grado').addClass('is-valid');
+                                    $('#materia').addClass('is-valid');
                                 }
                                 if (msj.responseJSON.errors.cupo != undefined) {
                                     $('#cupo').addClass('is-invalid');
@@ -164,7 +159,7 @@
             onContentReady: function () {
                 // bind to events
                 var jc = this;
-                this.$content.find('form#formGrado').on('submit', function (e) {
+                this.$content.find('form#formMateria').on('submit', function (e) {
                     // if the user submits the form by pressing enter in the field.
                     e.preventDefault();
                     jc.$$agregar.trigger('click'); // reference the button and click it
@@ -174,20 +169,15 @@
     }
 
     function editar(id) {
-        var grado =  $('tr#row'+id).find('td').eq(1).text();
-        var cupo =  $('tr#row'+id).find('td').eq(2).text();
+        var materia =  $('tr#row'+id).find('td').eq(1).text();
         var cf = $.confirm({
             icon: 'fas fa-keyboard',
-            title: 'Editar Grado',
+            title: 'Editar Materia',
             content: '' +
-                '<form id="formGrado">' +
+                '<form id="formMateria">' +
                 '<div class="form-group">' +
-                '<label for="grado">Grado</label>' +
-                '<input id="grado" type="text" placeholder="Grado" class="form-control" value="'+grado+'" />' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label for="cupo">Cupo</label>' +
-                '<input id="cupo" type="number" placeholder="Cupo" class="form-control" value="'+cupo+'" />' +
+                '<label for="materia">Materia</label>' +
+                '<input id="materia" type="text" placeholder="Materia" class="form-control" value="'+materia+'" />' +
                 '</div>' +
                 '</form>',
             type: 'orange',
@@ -199,11 +189,10 @@
                         var datos = new FormData();
                         datos.append('_method', 'PUT');
                         datos.append('id', id);
-                        datos.append('grado', $('#grado').val());
-                        datos.append('cupo', $('#cupo').val());
+                        datos.append('materia', $('#materia').val());
 
                         $.ajax({
-                            url: 'grados/' + id,
+                            url: 'materias/' + id,
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
@@ -213,17 +202,16 @@
                             cache: false,
                             data: datos,
                             beforeSend: function () {
-                                $('form#formGrado input').removeClass('is-invalid');
-                                $('#formGrado').removeClass('was-validated');
+                                $('form#formMateria input').removeClass('is-invalid');
+                                $('#formMateria').removeClass('was-validated');
                             },
                             success: function (response) {
-                                $('#formGrado').addClass('was-validated');
+                                $('#formMateria').addClass('was-validated');
                                 $('.listado').dataTable().fnDestroy();
                                 $('tr#row'+id).find('td').eq(0).text(response.id);
-                                $('tr#row'+id).find('td').eq(1).text(response.grado);
-                                $('tr#row'+id).find('td').eq(2).text(response.cupo);
-                                $('tr#row'+id).find('td').eq(3).text(response.created_at);
-                                $('tr#row'+id).find('td').eq(4).text(response.updated_at);
+                                $('tr#row'+id).find('td').eq(1).text(response.materia);
+                                $('tr#row'+id).find('td').eq(2).text(response.created_at);
+                                $('tr#row'+id).find('td').eq(3).text(response.updated_at);
                                 loadTable();
                                 marcar();
                                 toastr.options = {
@@ -248,9 +236,9 @@
                             },
                             error: function (msj) {
                                 console.log(msj);
-                                if (msj.responseJSON.errors.grado != undefined) {
-                                    $('#grado').addClass('is-invalid');
-                                    $('#invalid_grado').html(msj.responseJSON.errors.grado);
+                                if (msj.responseJSON.errors.materia != undefined) {
+                                    $('#materia').addClass('is-invalid');
+                                    $('#invalid_materia').html(msj.responseJSON.errors.materia);
                                     toastr.options = {
                                         "closeButton": true,
                                         "debug": false,
@@ -268,32 +256,9 @@
                                         "showMethod": "fadeIn",
                                         "hideMethod": "fadeOut"
                                     };
-                                    toastr.error(msj.responseJSON.errors.grado, '¡Lo sentimos!');
+                                    toastr.error(msj.responseJSON.errors.materia, '¡Lo sentimos!');
                                 } else {
-                                    $('#grado').addClass('is-valid');
-                                }
-                                if (msj.responseJSON.errors.cupo != undefined) {
-                                    $('#cupo').addClass('is-invalid');
-                                    toastr.options = {
-                                        "closeButton": true,
-                                        "debug": false,
-                                        "newestOnTop": true,
-                                        "progressBar": true,
-                                        "positionClass": "toast-bottom-right",
-                                        "preventDuplicates": false,
-                                        "onclick": null,
-                                        "showDuration": "400",
-                                        "hideDuration": "1000",
-                                        "timeOut": "5000",
-                                        "extendedTimeOut": "1000",
-                                        "showEasing": "swing",
-                                        "hideEasing": "linear",
-                                        "showMethod": "fadeIn",
-                                        "hideMethod": "fadeOut"
-                                    };
-                                    toastr.error(msj.responseJSON.errors.cupo, '¡Lo sentimos!');
-                                } else {
-                                    $('#cupo').addClass('is-valid');
+                                    $('#materia').addClass('is-valid');
                                 }
                             }
                         });
@@ -304,7 +269,7 @@
             onContentReady: function () {
                 // bind to events
                 var jc = this;
-                this.$content.find('form#formGrado').on('submit', function (e) {
+                this.$content.find('form#formMateria').on('submit', function (e) {
                     // if the user submits the form by pressing enter in the field.
                     e.preventDefault();
                     jc.$$editar.trigger('click'); // reference the button and click it

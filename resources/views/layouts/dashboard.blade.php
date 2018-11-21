@@ -97,7 +97,7 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
-                <a class=" mdl-navigation__link @if ($segment=='materias' ) bg-info text-white @endif" href="">
+                <a class=" mdl-navigation__link @if ($segment=='materias' ) bg-info text-white @endif" href="{{ route('materias.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-book mr-3 my-auto" style="width:2em; height:2em"></i>
                         <h5 class="my-auto">

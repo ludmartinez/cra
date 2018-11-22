@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
          $this->call(AdminsTableSeeder::class);
          $this->call(GradosTableSeeder::class);
          $this->call(MateriasTableSeeder::class);
+         $this->call(PeriodosTableSeeder::class);
     }
 }

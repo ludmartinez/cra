@@ -8,7 +8,6 @@ class Grado extends Model
 {
     protected $fillable = [
         'grado',
-        'cupo',
     ];
 
     protected $casts = [

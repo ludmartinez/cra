@@ -3,7 +3,6 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Grado</th>
-            <th scope="col">Cupo</th>
             <th scope="col">Creado</th>
             <th scope="col">Editado</th>
             <th scope="col">Acciones</th>
@@ -14,7 +13,6 @@
         <tr id="row{{ $grado->id }}">
             <td>{{ $grado->id }}</td>
             <td>{{ $grado->grado }}</td>
-            <td>{{ $grado->cupo }}</td>
             <td>{{ date('d/m/Y H:i:s', strtotime($grado->created_at)) }}</td>
             <td>{{ date('d/m/Y H:i:s', strtotime($grado->updated_at)) }}</td>
             <td class="text-center">

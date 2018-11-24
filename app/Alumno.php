@@ -46,4 +46,8 @@ class Alumno extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function matriculas(){
+        return $this->hasMany('App\Matricula', 'alumno_carnet', 'carnet');
+    }
 }

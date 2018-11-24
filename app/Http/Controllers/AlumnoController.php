@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Alumno;
-use App\CustomHelpers\StringHelper;
-use App\Http\Requests\StoreAlumno;
-use App\Http\Requests\UpdateAlumno;
 use App\User;
-use Illuminate\Auth\Access\Response;
+use App\Grado;
+use App\Alumno;
+use App\Periodo;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAlumno;
+use App\CustomHelpers\StringHelper;
+use App\Http\Requests\UpdateAlumno;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Storage;
 
 class AlumnoController extends Controller
@@ -76,8 +78,11 @@ class AlumnoController extends Controller
     {
         $segment = $request->segment(1);
         $user = $alumno->user;
-        // dd ($user->toArray());
-        return view('admin.alumnos.alumno', compact('alumno', 'user', 'segment'));
+        $matriculas = $alumno->matriculas;
+        $grados = Grado::all();
+        $periodos =  Periodo::all();
+        // dd($matriculas);
+        return view('admin.alumnos.alumno', compact('alumno', 'user', 'matriculas','grados', 'periodos', 'segment'));
     }
 
     /**

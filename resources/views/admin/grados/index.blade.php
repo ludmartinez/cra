@@ -41,10 +41,7 @@
                 '<div class="form-group">' +
                 '<label for="grado">Grado</label>' +
                 '<input id="grado" type="text" placeholder="Grado" class="form-control" />' +
-                '</div><div class="form-group">' +
-                '<label for="cupo">Cupo</label>'+
-                '<input id="cupo" type="number" placeholder="Cupo" class="form-control" /></div>' +
-                '</form>',
+                '</div></form>',
             type: 'blue',
             buttons: {
                 agregar: {
@@ -53,7 +50,6 @@
                     action: function () {
                         var datos = new FormData();
                         datos.append('grado', $('#grado').val());
-                        datos.append('cupo', $('#cupo').val());
 
                         $.ajax({
                             url: '{{ route("grados.store") }}',
@@ -74,7 +70,6 @@
                                 var row = '<tr id="row'+response.id+'">'
                                     row += '<td>'+response.id+'</td>'
                                     row += '<td>'+response.grado+'</td>'
-                                    row += '<td>'+response.cupo+'</td>'
                                     row += '<td>'+response.created_at+'</td>'
                                     row += '<td>'+response.updated_at+'</td>'
                                     row += '<td class="text-center">'
@@ -130,29 +125,6 @@
                                 } else {
                                     $('#grado').addClass('is-valid');
                                 }
-                                if (msj.responseJSON.errors.cupo != undefined) {
-                                    $('#cupo').addClass('is-invalid');
-                                    toastr.options = {
-                                        "closeButton": true,
-                                        "debug": false,
-                                        "newestOnTop": true,
-                                        "progressBar": true,
-                                        "positionClass": "toast-bottom-right",
-                                        "preventDuplicates": false,
-                                        "onclick": null,
-                                        "showDuration": "400",
-                                        "hideDuration": "1000",
-                                        "timeOut": "5000",
-                                        "extendedTimeOut": "1000",
-                                        "showEasing": "swing",
-                                        "hideEasing": "linear",
-                                        "showMethod": "fadeIn",
-                                        "hideMethod": "fadeOut"
-                                    };
-                                    toastr.error(msj.responseJSON.errors.cupo, '¡Lo sentimos!');
-                                } else {
-                                    $('#cupo').addClass('is-valid');
-                                }
                             }
                         });
                     }
@@ -175,7 +147,6 @@
 
     function editar(id) {
         var grado =  $('tr#row'+id).find('td').eq(1).text();
-        var cupo =  $('tr#row'+id).find('td').eq(2).text();
         var cf = $.confirm({
             icon: 'fas fa-keyboard',
             title: 'Editar Grado',
@@ -184,10 +155,6 @@
                 '<div class="form-group">' +
                 '<label for="grado">Grado</label>' +
                 '<input id="grado" type="text" placeholder="Grado" class="form-control" value="'+grado+'" />' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label for="cupo">Cupo</label>' +
-                '<input id="cupo" type="number" placeholder="Cupo" class="form-control" value="'+cupo+'" />' +
                 '</div>' +
                 '</form>',
             type: 'orange',
@@ -200,7 +167,6 @@
                         datos.append('_method', 'PUT');
                         datos.append('id', id);
                         datos.append('grado', $('#grado').val());
-                        datos.append('cupo', $('#cupo').val());
 
                         $.ajax({
                             url: 'grados/' + id,
@@ -221,9 +187,8 @@
                                 $('.listado').dataTable().fnDestroy();
                                 $('tr#row'+id).find('td').eq(0).text(response.id);
                                 $('tr#row'+id).find('td').eq(1).text(response.grado);
-                                $('tr#row'+id).find('td').eq(2).text(response.cupo);
-                                $('tr#row'+id).find('td').eq(3).text(response.created_at);
-                                $('tr#row'+id).find('td').eq(4).text(response.updated_at);
+                                $('tr#row'+id).find('td').eq(2).text(response.created_at);
+                                $('tr#row'+id).find('td').eq(3).text(response.updated_at);
                                 loadTable();
                                 marcar();
                                 toastr.options = {
@@ -271,29 +236,6 @@
                                     toastr.error(msj.responseJSON.errors.grado, '¡Lo sentimos!');
                                 } else {
                                     $('#grado').addClass('is-valid');
-                                }
-                                if (msj.responseJSON.errors.cupo != undefined) {
-                                    $('#cupo').addClass('is-invalid');
-                                    toastr.options = {
-                                        "closeButton": true,
-                                        "debug": false,
-                                        "newestOnTop": true,
-                                        "progressBar": true,
-                                        "positionClass": "toast-bottom-right",
-                                        "preventDuplicates": false,
-                                        "onclick": null,
-                                        "showDuration": "400",
-                                        "hideDuration": "1000",
-                                        "timeOut": "5000",
-                                        "extendedTimeOut": "1000",
-                                        "showEasing": "swing",
-                                        "hideEasing": "linear",
-                                        "showMethod": "fadeIn",
-                                        "hideMethod": "fadeOut"
-                                    };
-                                    toastr.error(msj.responseJSON.errors.cupo, '¡Lo sentimos!');
-                                } else {
-                                    $('#cupo').addClass('is-valid');
                                 }
                             }
                         });

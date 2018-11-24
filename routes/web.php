@@ -24,3 +24,4 @@ Route::resources([
 Route::resource('grados', 'GradoController')->only(['index', 'store', 'update', 'destroy']);
 Route::resource('materias', 'MateriaController')->only(['index', 'store', 'update', 'destroy']);
 Route::resource('periodos', 'PeriodoController')->except(['create']);
+Route::resource('matriculas', 'MatriculaController');

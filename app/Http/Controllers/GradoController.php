@@ -41,7 +41,6 @@ class GradoController extends Controller
     {
         $request->validate([
             'grado' => 'required|string|max:45|unique:grados',
-            'cupo'  => 'required|integer|min:0'
         ]);
 
         $grado = Grado::create($request->all());
@@ -60,7 +59,6 @@ class GradoController extends Controller
     {
         $request->validate([
             'grado' => "filled|string|max:45|unique:grados,grado,$request->id",
-            'cupo'  => "filled|integer|min:0"
         ]);
 
         $grado->update($request->all());

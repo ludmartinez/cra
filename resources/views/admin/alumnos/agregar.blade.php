@@ -16,13 +16,11 @@
                     {{-- foto del estudiante --}}
                     <div class="form-row card py-2 bg-light">
                         <div class="col-12 mb-1 text-center" id="contenedor-foto">
-                            <img src="{{ asset('img/foto-perfil.jpg') }}" id="foto-preview" alt="Foto" class="img-fluid"
-                                style="max-height:16.7em">
+                            <img src="{{ asset('img/foto-perfil.jpg') }}" id="foto-preview" alt="Foto" class="img-fluid" style="max-height:16.7em">
                         </div>
                         <div class="col-12">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="foto" name="foto" lang="es" accept="image/*"
-                                    capture="camera">
+                                <input type="file" class="custom-file-input" id="foto" name="foto" lang="es" accept="image/*" capture="camera">
                                 <label class="custom-file-label" for="foto">Escoga un archivo</label>
                                 <div class="invalid-feedback" id="invalid_foto">
                                     ¡Incorrecto!
@@ -47,8 +45,7 @@
                     <div class="form-row">
                         <div class="col-12 col-md-4 mb-3">
                             <label for="primerNombre">Primer Nombre</label>
-                            <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre"
-                                required>
+                            <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required>
                             <div id="invalid_primer_nombre" class="invalid-feedback">
                                 ¡Incorrecto!
                             </div>
@@ -72,16 +69,14 @@
                     <div class="form-row">
                         <div class="col-md mb-3">
                             <label for="apellidoPaterno">Apellido Paterno</label>
-                            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno"
-                                placeholder="Apellido Paterno" required>
+                            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" placeholder="Apellido Paterno" required>
                             <div id="invalid_apellido_paterno" class="invalid-feedback">
                                 ¡Incorrecto!
                             </div>
                         </div>
                         <div class="col-md mb-3">
                             <label for="apellidoMaterno">Apellido Materno</label>
-                            <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno"
-                                placeholder="Apellido Materno" required>
+                            <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" placeholder="Apellido Materno" required>
                             <div id="invalid_apellido_materno" class="invalid-feedback">
                                 ¡Incorrecto!
                             </div>
@@ -102,8 +97,7 @@
                         </div>
                         <div class="col-12 col-md mb-3">
                             <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control"
-                                required>
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" required>
                             <div id="invalid_fecha_nacimiento" class="invalid-feedback">
                                 ¡Incorrecto!
                             </div>
@@ -130,6 +124,7 @@
     </div>
 </section>
 @endsection
+
 @section('scripts')
 <script>
     $(function () {
@@ -206,6 +201,30 @@
                     "hideMethod": "fadeOut"
                 };
                 toastr.success('Registro agregado con éxito.', '¡En hora buena!');
+                $.confirm({
+                    title: '¿Qué desea?',
+                    content: 'Podemos realizar las siguientes acciones:',
+                    type: 'green',
+                    closeIcon: true,
+                    escapeKey: true,
+                    backgroundDismiss: true,
+                    buttons: {
+                        alumno: {
+                            text: 'Ver Alumno',
+                            btnClass: 'btn-success',
+                            action: function(){
+                                location.href = "/alumnos/"+response.alumno.carnet;
+                            }
+                        },
+                        listado: {
+                            text: 'Ir al listado',
+                            btnClass: 'btn-primary',
+                            action: function(){
+                                location.href = "{{ route('alumnos.index') }}"
+                            }
+                        },
+                    }
+                });
             },
             error: function (msj) {
                 console.log(msj);

@@ -90,6 +90,6 @@ class PeriodoController extends Controller
     public function destroy(Periodo $periodo)
     {
         Periodo::destroy($periodo->id);
-        return response()->json(['message' => 'Registro eliminado con éxito']);
+        return response()->json(['message' => 'Período eliminado con éxito']);
     }
 }

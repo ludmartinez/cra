@@ -15,13 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::resources([
-    'alumnos' => 'AlumnoController',
-    'docentes' => 'DocenteController',
-    'admins' => 'AdminController',
-]);
+Route::prefix('admin')->group(function(){
+    Route::resources([
+        'alumnos' => 'AlumnoController',
+        'docentes' => 'DocenteController',
+        'admins' => 'AdminController',
+    ]);
 
-Route::resource('grados', 'GradoController')->only(['index', 'store', 'update', 'destroy']);
-Route::resource('materias', 'MateriaController')->only(['index', 'store', 'update', 'destroy']);
-Route::resource('periodos', 'PeriodoController')->except(['create']);
-Route::resource('matriculas', 'MatriculaController');
+    Route::resource('grados', 'GradoController')->except(['edit', 'create']);
+    Route::resource('materias', 'MateriaController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('periodos', 'PeriodoController')->except(['create']);
+    Route::resource('matriculas', 'MatriculaController');
+    Route::resource('asignaciones', 'AsignacionController')->parameters(['asignaciones' => 'asignacion']);
+});

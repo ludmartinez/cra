@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grado;
+use App\Periodo;
 use Illuminate\Http\Request;
 
 class GradoController extends Controller
@@ -46,6 +47,20 @@ class GradoController extends Controller
         $grado = Grado::create($request->all());
 
         return response()->json($grado->toArray());
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Grado  $grado
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, Grado $grado)
+    {
+        $segment = $request->segment(1);
+        $alumnos = $grado->alumnos()->wherePivot('periodo_id', $request->p)->get();
+        $periodos = Periodo::all();
+        return view('admin.grados.grado', compact('segment', 'grado', 'alumnos', 'periodos', 'request'));
     }
 
     /**

@@ -1,12 +1,9 @@
-@inject('helper', 'App\CustomHelpers\StringHelper')
 @extends('layouts.dashboard')
 @section('contenido')
 <div class="row bg-secondary text-white">>
     <div class="col-12">
         <h3 class="text-center mx-auto mb-0">
-            {{
-            $helper->fullName($docente->primerNombre,$docente->segundoNombre,$docente->tercerNombre,$docente->apellidoPaterno,$docente->apellidoMaterno)
-            }}
+            {{ $docente->fullName() }}
         </h3>
     </div>
     <div class="col text-center pb-2">
@@ -28,19 +25,11 @@
                 </p>
             </div>
         </a>
-        <a href="#notas-panel" class="mdl-tabs__tab">
+        <a href="#asignacion-panel" class="mdl-tabs__tab">
             <div class="form-inline position-relative mt-2">
-                <i class="fas fa-award h2 my-0 my-auto mr-md-2"></i>
+                <i class="fas fa-handshake h2 my-0 my-auto mr-md-2"></i>
                 <p class="my-auto d-none d-md-block">
-                    Notas
-                </p>
-            </div>
-        </a>
-        <a href="#matriculas-panel" class="mdl-tabs__tab">
-            <div class="form-inline position-relative mt-2">
-                <i class="fas fa-th-list h2 my-auto mr-md-2"></i>
-                <p class="my-auto d-none d-md-block">
-                    Matrículas
+                    Asignaciones
                 </p>
             </div>
         </a>
@@ -145,19 +134,10 @@
             </div>
         </div>
     </div>
-    <div class="mdl-tabs__panel" id="notas-panel">
-        <ul>
-            <li>Tywin</li>
-            <li>Cersei</li>
-            <li>Jamie</li>
-            <li>Tyrion</li>
-        </ul>
-    </div>
-    <div class="mdl-tabs__panel" id="matriculas-panel">
-        <ul>
-            <li>Viserys</li>
-            <li>Daenerys</li>
-        </ul>
+    <div class="mdl-tabs__panel container p-2" id="asignacion-panel">
+        @component('admin.docentes.partials.asignaciones', compact('asignaciones', 'periodos', 'docente', 'materias', 'grados'))
+
+        @endcomponent
     </div>
 </div>
 <style>

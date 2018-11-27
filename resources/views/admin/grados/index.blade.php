@@ -67,14 +67,16 @@
                             },
                             success: function (response) {
                                 $('#formGrado').addClass('was-validated');
+                                var urlcontrol = "'{{ url('/admin/grados') }}/"+response.id+"'";
                                 var row = '<tr id="row'+response.id+'">'
                                     row += '<td>'+response.id+'</td>'
                                     row += '<td>'+response.grado+'</td>'
                                     row += '<td>'+response.created_at+'</td>'
                                     row += '<td>'+response.updated_at+'</td>'
                                     row += '<td class="text-center">'
-                                    row += '<button type="button" class="btn btn-warning" onclick="editar('+response.id+')"><i class="fas fa-edit"></i></button>'
-                                    row += ' <button type="button" class="btn btn-danger" onclick="eliminar('+response.id+')"><i class="fas fa-trash-alt"></i></button>'
+                                    row += '<a class="btn btn-primary" href="/grados/'+response.id+'"><i class="fas fa-eye"></i></a> '
+                                    row += '<button type="button" class="btn btn-warning" onclick="editar('+response.id+', '+urlcontrol+')"><i class="fas fa-edit"></i></button> '
+                                    row += '<button type="button" class="btn btn-danger" onclick="eliminar('+response.id+', '+urlcontrol+')"><i class="fas fa-trash-alt"></i></button>'
                                     row += '</td></tr>'
                                 $('.listado').dataTable().fnDestroy();
                                 $('#tablaGrados').find('tbody').append(row);
@@ -145,7 +147,7 @@
         });
     }
 
-    function editar(id) {
+    function editar(id, url) {
         var grado =  $('tr#row'+id).find('td').eq(1).text();
         var cf = $.confirm({
             icon: 'fas fa-keyboard',
@@ -169,7 +171,7 @@
                         datos.append('grado', $('#grado').val());
 
                         $.ajax({
-                            url: 'grados/' + id,
+                            url: url,
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },

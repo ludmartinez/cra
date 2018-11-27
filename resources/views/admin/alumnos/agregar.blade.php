@@ -213,7 +213,7 @@
                             text: 'Ver Alumno',
                             btnClass: 'btn-success',
                             action: function(){
-                                location.href = "/alumnos/"+response.alumno.carnet;
+                                location.href = "{{ url('admin/alumnos') }}/"+response.alumno.carnet;
                             }
                         },
                         listado: {

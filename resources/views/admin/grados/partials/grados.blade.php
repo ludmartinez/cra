@@ -16,8 +16,9 @@
             <td>{{ date('d/m/Y H:i:s', strtotime($grado->created_at)) }}</td>
             <td>{{ date('d/m/Y H:i:s', strtotime($grado->updated_at)) }}</td>
             <td class="text-center">
-                <button type="button" class="btn btn-warning" onclick="editar({{ $grado->id }})"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn btn-danger" onclick="eliminar({{ $grado->id }})"><i
+                <a href="{{ route('grados.show', ['grado'=>$grado, 'p'=>1]) }}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                <button type="button" class="btn btn-warning" onclick="editar({{ $grado->id }},'{{ route('grados.update', $grado) }}')"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-danger" onclick="eliminar({{ $grado->id }},'{{ route('grados.destroy', $grado) }}')"><i
                         class="fas fa-trash-alt"></i></button>
             </td>
         </tr>
@@ -26,7 +27,7 @@
 </table>
 {{-- {{ $grados->links() }} --}}
 <script>
-    function eliminar(id) {
+    function eliminar(id, url) {
         var grado =  $('tr#row'+id).find('td').eq(1).text();
         $.confirm({
             icon: 'fas fa-exclamation-triangle',
@@ -38,7 +39,7 @@
                     btnClass: 'btn btn-danger',
                     action: function () {
                         $.ajax({
-                            url: "grados/" + id,
+                            url: url,
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },

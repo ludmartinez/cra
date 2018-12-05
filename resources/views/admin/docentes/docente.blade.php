@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-12 col-md mt-2">
                                 <label for="txt_password">Contraseña</label>
-                                <input type="text" class="form-control" name="password" id="txt_password" value="{{ $user->password }}"
+                                <input type="text" class="form-control" name="password" id="txt_password" value="{{ substr(md5($docente->carnet), -8) }}"
                                     readonly>
                             </div>
                             <div class="col-12 col-md-12 mt-2">

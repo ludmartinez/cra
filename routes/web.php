@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware('auth')->group(function(){
     Route::resources([
         'alumnos' => 'AlumnoController',
         'docentes' => 'DocenteController',
@@ -28,3 +28,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('matriculas', 'MatriculaController');
     Route::resource('asignaciones', 'AsignacionController')->parameters(['asignaciones' => 'asignacion']);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -44,3 +44,10 @@ $factory->define(App\Docente::class, function (Faker $faker) {
         'fechaIngreso' => $faker->date($format = 'Y-m-d', $max = 'now'),
     ];
 });
+
+$factory->afterCreating(App\Docente::class, function ($docente, $faker) {
+    $docente->refresh();
+    $usuario = $docente->user;
+    $usuario->password = bcrypt($usuario->password);
+    $usuario->save();
+});

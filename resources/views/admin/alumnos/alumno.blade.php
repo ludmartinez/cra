@@ -96,7 +96,7 @@
                             </div>
                             <div class="col-12 col-md mt-2">
                                 <label for="txt_password">Contraseña</label>
-                                <input type="text" class="form-control" name="password" id="txt_password" value="{{ $user->password }}" readonly>
+                                <input type="text" class="form-control" name="password" id="txt_password" value="{{ substr(md5($alumno->carnet), -8) }}" readonly>
                             </div>
                             <div class="col-12 col-md-12 mt-2">
                                 <label for="txt_email">Email</label>
@@ -127,9 +127,7 @@
         </div>
     </div>
     <div class="mdl-tabs__panel container p-2" id="matriculas-panel">
-        @component('admin.alumnos.partials.matriculas', compact('matriculas', 'grados', 'alumno', 'periodos'))
-
-        @endcomponent
+        @component('admin.alumnos.partials.matriculas', compact('matriculas', 'grados', 'alumno', 'periodos')) @endcomponent
     </div>
     <div class="mdl-tabs__panel" id="notas-panel">
         <ul>

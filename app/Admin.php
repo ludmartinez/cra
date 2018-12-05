@@ -10,7 +10,10 @@ class Admin extends Model
 
     protected $keyType = 'string';
 
+    public $incrementing = false;
+
     protected $fillable = [
+        'carnet',
         'dui',
         'primerNombre',
         'segundoNombre',

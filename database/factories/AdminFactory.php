@@ -1,7 +1,8 @@
 <?php
 
-use Faker\Generator as Faker;
 use App\CustomHelpers\StringHelper;
+use App\User;
+use Faker\Generator as Faker;
 
 $factory->define(App\Admin::class, function (Faker $faker) {
     $sexo = $faker->randomElement($array = array('Femenino', 'Masculino'));
@@ -43,4 +44,11 @@ $factory->define(App\Admin::class, function (Faker $faker) {
         'fechaNacimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'fechaIngreso' => $faker->date($format = 'Y-m-d', $max = 'now'),
     ];
+});
+
+$factory->afterCreating(App\Admin::class, function ($admin, $faker) {
+    $admin->refresh();
+    $usuario = $admin->user;
+    $usuario->password = bcrypt($usuario->password);
+    $usuario->save();
 });

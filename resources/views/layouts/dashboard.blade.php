@@ -26,14 +26,19 @@
 mdl-layout--fixed-header">
         <header class="mdl-layout__header">
 
+
+
 @section('header')
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title">CRA</span>
                 <div class="mdl-layout-spacer"></div>
                 <!-- Botón de usuario -->
                 <div class="btn-group">
-                    <img src="{{ asset('img/Lentes-personas-más-inteligentes.jpg') }}" class="d-none d-md-block" style="max-height:3em" alt="foto de perfil">
-                    <button type="button" class="btn btn-success">Neoma Moore</button>
+                    <img src="{{ auth()->user()->usuario()[0]->foto }}" class="d-none d-md-block" style="max-height:3em" alt="foto de perfil">
+                    <button type="button" class="btn btn-success">
+                        {{ auth()->user()->usuario()[0]->primerNombre }}
+                        {{ auth()->user()->usuario()[0]->apellidoPaterno }}
+                    </button>
                     <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
@@ -48,10 +53,13 @@ mdl-layout--fixed-header">
                             Configuración
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fa fa-sign-out-alt"></i>
                             Cerrar Sesión
                         </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
@@ -82,6 +90,7 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
+                @if (auth()->user()->usuario()[0]->superUsuario)
                 <a class="mdl-navigation__link @if ($segment=='admins') bg-info text-white @endif" href="{{ route('admins.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-user-cog mr-3 my-auto" style="width:2em; height:2em"></i>
@@ -90,6 +99,7 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
+                @endif
                 <a class="mdl-navigation__link @if ($segment=='grados') bg-info text-white @endif" href="{{ route('grados.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-list-ol mr-3 my-auto" style="width:2em; height:2em"></i>

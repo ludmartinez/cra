@@ -44,7 +44,7 @@ class CreateDocentesTable extends Migration
                 DECLARE email varchar(255);
                 DECLARE pass varchar(255);
                 SET email = lower(concat(substring(NEW.primerNombre,1,1),NEW.apellidoPaterno,'.',lower(NEW.carnet),'@cra.edu.sv'));
-                SET pass = substring(md5(rand()),-8);
+                SET pass = substring(md5(NEW.carnet),-8);
                 INSERT INTO users(usuario, email, password, tipo, created_at, updated_at) values(lower(NEW.carnet), email, pass, 'Docente', NEW.created_at, NEW.updated_at);
                 SET NEW.user_id = (SELECT id FROM users WHERE usuario = lower(NEW.carnet));
                 SET NEW.carnet = upper(NEW.carnet);

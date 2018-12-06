@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Matricula extends Pivot
@@ -40,6 +41,10 @@ class Matricula extends Pivot
     public function grado()
     {
         return $this->belongsTo('App\Grado');
+    }
+
+    public static function historial(){
+        return DB::table('historial_matriculas')->get();
     }
 
 }

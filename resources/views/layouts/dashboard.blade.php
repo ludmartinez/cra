@@ -34,10 +34,10 @@ mdl-layout--fixed-header">
                 <div class="mdl-layout-spacer"></div>
                 <!-- Botón de usuario -->
                 <div class="btn-group">
-                    <img src="{{ auth()->user()->usuario()[0]->foto }}" class="d-none d-md-block" style="max-height:3em" alt="foto de perfil">
+                    <img src="{{ auth()->user()->usuario()->foto }}" class="d-none d-md-block" style="max-height:3em" alt="foto de perfil">
                     <button type="button" class="btn btn-success">
-                        {{ auth()->user()->usuario()[0]->primerNombre }}
-                        {{ auth()->user()->usuario()[0]->apellidoPaterno }}
+                        {{ auth()->user()->usuario()->primerNombre }}
+                        {{ auth()->user()->usuario()->apellidoPaterno }}
                     </button>
                     <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
@@ -74,15 +74,15 @@ mdl-layout--fixed-header">
                 </div>
             </div>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link @if ($segment=='alumnos') bg-info text-white @endif" href="{{ route( 'alumnos.index') }}">
+                <a class="mdl-navigation__link @if ($segment=='alumnos') bg-info text-white @endif" href="{{ route('alumnos.index') }}">
                     <div class="form-inline">
-                        <i class="fas fa-user-graduate mr-3 my-auto" style="width:1.5; height:1.5"></i>
+                        <i class="fas fa-user-graduate mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
                             Alumnos
                         </h5>
                     </div>
                 </a>
-                <a class="mdl-navigation__link @if ($segment=='docentes' ) bg-info text-white @endif" href="{{ route('docentes.index') }}">
+                <a class="mdl-navigation__link @if ($segment=='docentes') bg-info text-white @endif" href="{{ route('docentes.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-chalkboard-teacher mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -90,7 +90,7 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
-                @if (auth()->user()->usuario()[0]->superUsuario)
+                @if (auth()->user()->usuario()->superUsuario)
                 <a class="mdl-navigation__link @if ($segment=='admins') bg-info text-white @endif" href="{{ route('admins.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-user-cog mr-3 my-auto" style="width:1.5em; height:1.5em"></i>

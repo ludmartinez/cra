@@ -14,9 +14,11 @@ class MatriculaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $segment = $request->segment(2);
+        $matriculas = Matricula::historial();
+        return view('admin.matriculas.index', compact('segment', 'matriculas'));
     }
 
     /**

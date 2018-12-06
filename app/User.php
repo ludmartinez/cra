@@ -2,10 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -37,5 +36,25 @@ class User extends Authenticatable
     public function docente()
     {
         return $this->hasOne('App\Docente');
+    }
+
+    public function admin()
+    {
+        return $this->hasOne('App\Admin');
+    }
+
+    public function usuario()
+    {
+        switch ($this->tipo) {
+            case 'Alumno':
+                return $this->alumno;
+                break;
+            case 'Docente':
+                return $this->docente;
+                break;
+            case 'Admin':
+                return $this->admin;
+                break;
+        }
     }
 }

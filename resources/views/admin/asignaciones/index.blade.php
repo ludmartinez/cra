@@ -1,4 +1,4 @@
-@extends('layouts.dashboard');
+@extends('layouts.dashboard')
 @section('contenido')
 <section class="container">
     <h3>Listado de Asignaciones</h3>

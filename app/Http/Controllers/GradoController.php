@@ -15,7 +15,7 @@ class GradoController extends Controller
      */
     public function index(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $grados = Grado::all();
 
         return view('admin.grados.index', compact('segment', 'grados'));
@@ -57,7 +57,7 @@ class GradoController extends Controller
      */
     public function show(Request $request, Grado $grado)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $alumnos = $grado->alumnos()->wherePivot('periodo_id', $request->p)->get();
         $periodos = Periodo::all();
         return view('admin.grados.grado', compact('segment', 'grado', 'alumnos', 'periodos', 'request'));

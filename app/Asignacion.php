@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Asignacion extends Pivot
@@ -48,5 +49,9 @@ class Asignacion extends Pivot
     public function materia()
     {
         return $this->belongsTo('App\Materia');
+    }
+
+    public static function historial(){
+        return DB::table('historial_asignaciones')->get();
     }
 }

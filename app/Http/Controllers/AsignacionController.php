@@ -14,9 +14,11 @@ class AsignacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $segment = $request->segment(2);
+        $asignaciones = Asignacion::historial();
+        return view('admin.asignaciones.index', compact('segment', 'asignaciones'));
     }
 
     /**

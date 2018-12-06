@@ -19,7 +19,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $adminsActivos = Admin::where('estado', true)->get();
         $adminsInactivos = Admin::where('estado', false)->get();
         return view('admin.admins.index', compact('segment', 'adminsActivos', 'adminsInactivos'));
@@ -32,7 +32,7 @@ class AdminController extends Controller
      */
     public function create(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         return view('admin.admins.agregar', compact('segment'));
     }
 
@@ -73,7 +73,7 @@ class AdminController extends Controller
      */
     public function show(Request $request, Admin $admin)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $user = $admin->user;
         return view('admin.admins.admin', compact('segment', 'admin', 'user'));
     }
@@ -86,7 +86,7 @@ class AdminController extends Controller
      */
     public function edit(Request $request, Admin $admin)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         return view('admin.admins.editar', compact('admin', 'segment'));
     }
 

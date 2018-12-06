@@ -22,7 +22,7 @@ class DocenteController extends Controller
      */
     public function index(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $docentesActivos = Docente::where('estado', true)->get();
         $docentesInactivos = Docente::where('estado', false)->get();
         return view('admin.docentes.index', compact('segment', 'docentesActivos', 'docentesInactivos'));
@@ -35,7 +35,7 @@ class DocenteController extends Controller
      */
     public function create(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         return view('admin.docentes.agregar', compact('segment'));
     }
 
@@ -75,7 +75,7 @@ class DocenteController extends Controller
      */
     public function show(Request $request, Docente $docente)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $user = $docente->user;
         $asignaciones = $docente->asignaciones;
         $grados = Grado::all();
@@ -92,7 +92,7 @@ class DocenteController extends Controller
      */
     public function edit(Request $request, Docente $docente)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         return view('admin.docentes.editar', compact('docente', 'segment'));
     }
 

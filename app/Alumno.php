@@ -29,6 +29,8 @@ class Alumno extends Model
         'estado' => 'boolean',
     ];
 
+    public $incrementing = false;
+
     public function fullName()
     {
         $name = $this->primerNombre . '-';

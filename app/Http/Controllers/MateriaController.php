@@ -14,7 +14,7 @@ class MateriaController extends Controller
      */
     public function index(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $materias = Materia::all();
 
         return view('admin.materias.index', compact('segment', 'materias'));

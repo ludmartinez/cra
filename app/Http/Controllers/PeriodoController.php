@@ -16,7 +16,7 @@ class PeriodoController extends Controller
      */
     public function index(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $periodos = Periodo::all();
 
         return view('admin.periodos.index', compact('segment', 'periodos'));

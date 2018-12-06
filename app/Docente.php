@@ -23,6 +23,8 @@ class Docente extends Model
         'estado'
     ];
 
+    public $incrementing = false;
+
     public function fullName(){
         $name = $this->primerNombre . '-';
         $name .= $this->segundoNombre . '-';

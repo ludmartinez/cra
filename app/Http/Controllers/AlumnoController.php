@@ -22,7 +22,7 @@ class AlumnoController extends Controller
      */
     public function index(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $alumnosActivos = Alumno::where('estado', true)->get();
         $alumnosInactivos = Alumno::where('estado', false)->get();
         // dd($segment);
@@ -36,7 +36,7 @@ class AlumnoController extends Controller
      */
     public function create(Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         return view('admin.alumnos.agregar', compact('segment'));
     }
 
@@ -76,7 +76,7 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno, Request $request)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         $user = $alumno->user;
         $matriculas = $alumno->matriculas;
         $grados = Grado::all();
@@ -93,7 +93,7 @@ class AlumnoController extends Controller
      */
     public function edit(Request $request, Alumno $alumno)
     {
-        $segment = $request->segment(1);
+        $segment = $request->segment(2);
         return view('admin.alumnos.editar', compact('alumno', 'segment'));
     }
 

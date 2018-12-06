@@ -65,7 +65,7 @@ mdl-layout--fixed-header">
             </div>
             @show
         </header>
-        <aside class="mdl-layout__drawer">
+        <aside class="mdl-layout__drawer p-0">
             <div class="mdl-grid bg-dark">
                 <div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
                     <a href="{{ route('home') }}">
@@ -76,7 +76,7 @@ mdl-layout--fixed-header">
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link @if ($segment=='alumnos') bg-info text-white @endif" href="{{ route( 'alumnos.index') }}">
                     <div class="form-inline">
-                        <i class="fas fa-user-graduate mr-3 my-auto" style="width:2em; height:2em"></i>
+                        <i class="fas fa-user-graduate mr-3 my-auto" style="width:1.5; height:1.5"></i>
                         <h5 class="my-auto">
                             Alumnos
                         </h5>
@@ -84,7 +84,7 @@ mdl-layout--fixed-header">
                 </a>
                 <a class="mdl-navigation__link @if ($segment=='docentes' ) bg-info text-white @endif" href="{{ route('docentes.index') }}">
                     <div class="form-inline">
-                        <i class="fas fa-chalkboard-teacher mr-3 my-auto" style="width:2em; height:2em"></i>
+                        <i class="fas fa-chalkboard-teacher mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
                             Docentes
                         </h5>
@@ -93,7 +93,7 @@ mdl-layout--fixed-header">
                 @if (auth()->user()->usuario()[0]->superUsuario)
                 <a class="mdl-navigation__link @if ($segment=='admins') bg-info text-white @endif" href="{{ route('admins.index') }}">
                     <div class="form-inline">
-                        <i class="fas fa-user-cog mr-3 my-auto" style="width:2em; height:2em"></i>
+                        <i class="fas fa-user-cog mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
                             Admins
                         </h5>
@@ -102,7 +102,7 @@ mdl-layout--fixed-header">
                 @endif
                 <a class="mdl-navigation__link @if ($segment=='grados') bg-info text-white @endif" href="{{ route('grados.index') }}">
                     <div class="form-inline">
-                        <i class="fas fa-list-ol mr-3 my-auto" style="width:2em; height:2em"></i>
+                        <i class="fas fa-list-ol mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
                             Grados
                         </h5>
@@ -110,7 +110,7 @@ mdl-layout--fixed-header">
                 </a>
                 <a class=" mdl-navigation__link @if ($segment=='materias' ) bg-info text-white @endif" href="{{ route('materias.index') }}">
                     <div class="form-inline">
-                        <i class="fas fa-book mr-3 my-auto" style="width:2em; height:2em"></i>
+                        <i class="fas fa-book mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
                             Materias
                         </h5>
@@ -118,17 +118,25 @@ mdl-layout--fixed-header">
                 </a>
                 <a class=" mdl-navigation__link @if ($segment=='periodos' ) bg-info text-white @endif" href="{{ route('periodos.index') }}">
                     <div class="form-inline">
-                        <i class="fas fa-calendar-alt mr-3 my-auto" style="width:2em; height:2em"></i>
+                        <i class="fas fa-calendar-alt mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
                             Períodos
                         </h5>
                     </div>
                 </a>
-                <a class="mdl-navigation__link @if ($segment=='matriculas' ) bg-info text-white @endif" href="">
+                <a class="mdl-navigation__link @if ($segment=='matriculas' ) bg-info text-white @endif" href="{{ route('matriculas.index') }}">
                     <div class="form-inline">
-                        <i class="fas fa-th-list mr-3 my-auto" style="width:2em; height:2em"></i>
+                        <i class="fas fa-th-list mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
                             Matrículas
+                        </h5>
+                    </div>
+                </a>
+                <a class="mdl-navigation__link @if ($segment=='asignaciones' ) bg-info text-white @endif" href="{{ route('asignaciones.index') }}">
+                    <div class="form-inline">
+                        <i class="fas fa-th-list mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
+                        <h5 class="my-auto">
+                            Asignaciones
                         </h5>
                     </div>
                 </a>

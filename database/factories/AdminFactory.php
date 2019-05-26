@@ -49,6 +49,6 @@ $factory->define(App\Admin::class, function (Faker $faker) {
 $factory->afterCreating(App\Admin::class, function ($admin, $faker) {
     $admin->refresh();
     $usuario = $admin->user;
-    $usuario->password = bcrypt($usuario->password);
+    $usuario->password = bcrypt('secret');
     $usuario->save();
 });

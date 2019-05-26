@@ -1,7 +1,7 @@
 <?php
 
-use Faker\Generator as Faker;
 use App\CustomHelpers\StringHelper;
+use Faker\Generator as Faker;
 
 $factory->define(App\Docente::class, function (Faker $faker) {
     $sexo = $faker->randomElement($array = array('Femenino', 'Masculino'));
@@ -48,6 +48,7 @@ $factory->define(App\Docente::class, function (Faker $faker) {
 $factory->afterCreating(App\Docente::class, function ($docente, $faker) {
     $docente->refresh();
     $usuario = $docente->user;
-    $usuario->password = bcrypt($usuario->password);
+    // $usuario->password = bcrypt($usuario->password);
+    $usuario->password = bcrypt('secret');
     $usuario->save();
 });

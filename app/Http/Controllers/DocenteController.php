@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Grado;
-use App\Docente;
-use App\Materia;
-use App\Periodo;
-use Illuminate\Http\Request;
 use App\CustomHelpers\StringHelper;
+use App\Docente;
+use App\Grado;
 use App\Http\Requests\StoreDocente;
 use App\Http\Requests\UpdateDocente;
+use App\Materia;
+use App\Periodo;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DocenteController extends Controller
@@ -132,5 +132,13 @@ class DocenteController extends Controller
     public function destroy(Docente $docente)
     {
         //
+    }
+
+    public function mainpage(Request $request)
+    {
+        $segment = "";
+        $materias = $request->user()->docente->asignaciones->unique('materia_id');
+        $asignaciones = $request->user()->docente->asignaciones;
+        return view('docente.index', compact('segment', 'materias', 'asignaciones'));
     }
 }

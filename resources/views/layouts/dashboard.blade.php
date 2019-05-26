@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-blue.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.css"
-    />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs4/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
     <link rel="shortcut icon" href="{{ asset('cra.ico') }}" type="image/x-icon">
@@ -22,25 +22,22 @@
 <body>
     <!-- The drawer is always open in large screens. The header is always shown,
   even in small screens. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-mdl-layout--fixed-header">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
-
-
-
-@section('header')
+            @section('header')
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title">CRA</span>
                 <div class="mdl-layout-spacer"></div>
                 <!-- Botón de usuario -->
                 <div class="btn-group">
-                    <img src="{{ auth()->user()->usuario()->foto }}" class="d-none d-md-block" style="max-height:3em" alt="foto de perfil">
+                    <img src="{{ auth()->user()->usuario()->foto }}" class="d-none d-md-block" style="max-height:3em"
+                        alt="foto de perfil">
                     <button type="button" class="btn btn-success">
                         {{ auth()->user()->usuario()->primerNombre }}
                         {{ auth()->user()->usuario()->apellidoPaterno }}
                     </button>
-                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -53,7 +50,8 @@ mdl-layout--fixed-header">
                             Configuración
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fa fa-sign-out-alt"></i>
                             Cerrar Sesión
                         </a>
@@ -65,6 +63,7 @@ mdl-layout--fixed-header">
             </div>
             @show
         </header>
+        @section('aside')
         <aside class="mdl-layout__drawer p-0">
             <div class="mdl-grid bg-dark">
                 <div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
@@ -74,7 +73,8 @@ mdl-layout--fixed-header">
                 </div>
             </div>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link @if ($segment=='alumnos') bg-info text-white @endif" href="{{ route('alumnos.index') }}">
+                <a class="mdl-navigation__link @if ($segment=='alumnos') bg-info text-white @endif"
+                    href="{{ route('alumnos.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-user-graduate mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -82,7 +82,8 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
-                <a class="mdl-navigation__link @if ($segment=='docentes') bg-info text-white @endif" href="{{ route('docentes.index') }}">
+                <a class="mdl-navigation__link @if ($segment=='docentes') bg-info text-white @endif"
+                    href="{{ route('docentes.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-chalkboard-teacher mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -91,7 +92,8 @@ mdl-layout--fixed-header">
                     </div>
                 </a>
                 @if (auth()->user()->usuario()->superUsuario)
-                <a class="mdl-navigation__link @if ($segment=='admins') bg-info text-white @endif" href="{{ route('admins.index') }}">
+                <a class="mdl-navigation__link @if ($segment=='admins') bg-info text-white @endif"
+                    href="{{ route('admins.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-user-cog mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -100,7 +102,17 @@ mdl-layout--fixed-header">
                     </div>
                 </a>
                 @endif
-                <a class="mdl-navigation__link @if ($segment=='grados') bg-info text-white @endif" href="{{ route('grados.index') }}">
+                <a class="mdl-navigation__link @if ($segment=='direcciones') bg-info text-white @endif"
+                    href="{{ route('direcciones.index') }}">
+                    <div class="form-inline">
+                        <i class="fas fa-list-ol mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
+                        <h5 class="my-auto">
+                            Direcciones
+                        </h5>
+                    </div>
+                </a>
+                <a class="mdl-navigation__link @if ($segment=='grados') bg-info text-white @endif"
+                    href="{{ route('grados.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-list-ol mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -108,7 +120,8 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
-                <a class=" mdl-navigation__link @if ($segment=='materias' ) bg-info text-white @endif" href="{{ route('materias.index') }}">
+                <a class=" mdl-navigation__link @if ($segment=='materias' ) bg-info text-white @endif"
+                    href="{{ route('materias.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-book mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -116,7 +129,8 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
-                <a class=" mdl-navigation__link @if ($segment=='periodos' ) bg-info text-white @endif" href="{{ route('periodos.index') }}">
+                <a class=" mdl-navigation__link @if ($segment=='periodos' ) bg-info text-white @endif"
+                    href="{{ route('periodos.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-calendar-alt mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -124,7 +138,8 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
-                <a class="mdl-navigation__link @if ($segment=='matriculas' ) bg-info text-white @endif" href="{{ route('matriculas.index') }}">
+                <a class="mdl-navigation__link @if ($segment=='matriculas' ) bg-info text-white @endif"
+                    href="{{ route('matriculas.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-th-list mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -132,7 +147,8 @@ mdl-layout--fixed-header">
                         </h5>
                     </div>
                 </a>
-                <a class="mdl-navigation__link @if ($segment=='asignaciones' ) bg-info text-white @endif" href="{{ route('asignaciones.index') }}">
+                <a class="mdl-navigation__link @if ($segment=='asignaciones' ) bg-info text-white @endif"
+                    href="{{ route('asignaciones.index') }}">
                     <div class="form-inline">
                         <i class="fas fa-th-list mr-3 my-auto" style="width:1.5em; height:1.5em"></i>
                         <h5 class="my-auto">
@@ -142,6 +158,7 @@ mdl-layout--fixed-header">
                 </a>
             </nav>
         </aside>
+        @show
         <main class="mdl-layout__content">
             <div class="page-content">
                 <!-- Your content goes here -->
@@ -208,21 +225,26 @@ mdl-layout--fixed-header">
     </div>
 
     <!-- Optional JavaScript -->
-    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js" integrity="sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7"
-        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"
+        integrity="sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7" crossorigin="anonymous">
+    </script>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
     {{--
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     --}}
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.js">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.es6.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>

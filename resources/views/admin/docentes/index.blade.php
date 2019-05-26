@@ -10,7 +10,7 @@
 
     <div class="mdl-tabs__tab-bar sticky-top bg-light">
         <a href="#activos-panel" class="mdl-tabs__tab is-active">Activos</a>
-        <a href="#inactivos-panel" class="mdl-tabs__tab">Inactivos</a>
+        {{-- <a href="#inactivos-panel" class="mdl-tabs__tab">Inactivos</a> --}}
     </div>
 
     <div class="mdl-tabs__panel is-active p-2 container" id="activos-panel">

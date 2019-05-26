@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Matricula;
-use Illuminate\Http\Request;
+use App\Grado;
 use App\Http\Requests\StoreMatricula;
 use App\Http\Requests\UpdateMatricula;
+use App\Materia;
+use App\Matricula;
+use App\Periodo;
+use Illuminate\Http\Request;
 
 class MatriculaController extends Controller
 {
@@ -99,5 +102,16 @@ class MatriculaController extends Controller
     {
         Matricula::destroy($matricula->id);
         return response()->json(['message' => 'Registro eliminado con éxito']);
+    }
+
+    public function listadoGrados(Periodo $periodo, Materia $materia, Grado $grado)
+    {
+        $segment = "";
+        $matriculas = Matricula::where([
+            ['periodo_id', $periodo->id],
+            ['grado_id', $grado->id],
+        ])->get();
+        return view('docente.listadogrados', compact('segment', 'matriculas', 'grado'));
+        // return dd($matriculas);
     }
 }

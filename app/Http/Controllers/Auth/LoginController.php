@@ -47,7 +47,7 @@ class LoginController extends Controller
             case 'Admin':
                 return route('alumnos.index');
             case 'Docente':
-                return '/';
+                return route('docente.main');
                 break;
             case 'Alumno':
                 return route('home');

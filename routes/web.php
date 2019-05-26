@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::prefix('admin')->middleware('auth')->group(function(){
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resources([
         'alumnos' => 'AlumnoController',
         'docentes' => 'DocenteController',
@@ -27,6 +27,14 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::resource('periodos', 'PeriodoController')->except(['create']);
     Route::resource('matriculas', 'MatriculaController');
     Route::resource('asignaciones', 'AsignacionController')->parameters(['asignaciones' => 'asignacion']);
+    Route::resource('direcciones', 'DireccionController')->parameters(['direcciones' => 'direccion']);
+    Route::resource('departamentos', 'DepartamentoController');
+    Route::resource('municipios', 'MunicipioController');
+});
+
+Route::prefix('docente')->middleware('auth')->group(function () {
+    Route::get('/', 'DocenteController@mainpage')->name('docente.main');
+    Route::get('/{periodo}/{materia}/{grado}', 'MatriculaController@listadoGrados')->name('matricula.listadogrados');
 });
 
 Auth::routes();
